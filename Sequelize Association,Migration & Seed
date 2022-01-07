@@ -1,0 +1,33 @@
+Following are the commands for migration & seed:
+
+Sequelize commands.
+=====
+Install sequelize-cli (one time)
+npm install sequelize-cli --save -g
+
+Create migration 
+sequelize migration:create --name="test"
+
+Run migration:
+sequelize db:migrate
+
+Undo migration.
+sequelize db:migrate:undo
+
+Seeding:
+sequelize seed:create --name demo-user
+
+Run seed:
+sequelize db:seed:all
+
+sequelize db:seed:undo
+
+Association
+========
+
+Player.belongsTo(Team) — One to one. key created in source(player)
+
+Project.hasMany(User) — One to many. Key ‘Projectid’ created in target table(User)
+Country.hasMany(City, {foreignKey: 'countryCode', sourceKey: 'isoCode'}); — change the FK field name to ‘countryCode’ in City referencing ‘isoCode’ in Country
+
+Project.belongsToMany(User, {through: 'UserProject'}); — many to many relations, UserProject as intermediate table with UserId and ProjectId as composite key
